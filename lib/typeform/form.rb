@@ -29,7 +29,7 @@ module Typeform
     private
       def get(params = nil)
         params ||= {}
-        params[:key] = key || Typeform.api_key
+        params[:key] = api_key || Typeform.api_key
         Typeform.get uri, :query => params
       end
 
