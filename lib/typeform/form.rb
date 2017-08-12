@@ -4,10 +4,11 @@ require 'json'
 module Typeform
 
   class Form
-    attr_reader :form_id
+    attr_reader :form_id, :api_key
 
-    def initialize(form_id)
+    def initialize(form_id:, api_key:nil)
       @form_id = form_id
+      @api_key = api_key
     end
 
     def all_entries
@@ -28,7 +29,7 @@ module Typeform
     private
       def get(params = nil)
         params ||= {}
-        params[:key] = Typeform.api_key
+        params[:key] = key || Typeform.api_key
         Typeform.get uri, :query => params
       end
 
