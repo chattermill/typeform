@@ -4,6 +4,7 @@ require 'json'
 module Typeform
 
   class Form
+    # This class doesn't have major changes for backward compatibility.
     attr_reader :form_id, :api_key
 
     def initialize(form_id:, api_key:nil)
@@ -29,12 +30,12 @@ module Typeform
     private
       def get(params = nil)
         params ||= {}
-        params[:key] = api_key || Typeform.api_key
+        params[:key] = api_key
         Typeform.get uri, :query => params
       end
 
       def uri
-        "/form/#{form_id}"
+        "/v1/form/#{form_id}"
       end
   end
 
