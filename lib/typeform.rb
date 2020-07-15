@@ -29,6 +29,7 @@ module Typeform
   end
 
   class ClientError < StandardError; end
+  class ForbiddenError < StandardError; end
   class ServerError < StandardError; end
   class BadRequest < TypeformError; end
   class Unauthorized < StandardError; end
@@ -69,6 +70,8 @@ module Typeform
           raise BadRequest.new response.parsed_response
         when 401
           raise Unauthorized.new
+        when 403
+          raise Forbidden.new response.parsed_response
         when 404
           raise NotFound.new
         when 400...500
