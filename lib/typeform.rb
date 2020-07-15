@@ -29,7 +29,7 @@ module Typeform
   end
 
   class ClientError < StandardError; end
-  class ForbiddenError < StandardError; end
+  class Forbidden < StandardError; end
   class ServerError < StandardError; end
   class BadRequest < TypeformError; end
   class Unauthorized < StandardError; end
