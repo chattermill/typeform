@@ -1,4 +1,3 @@
-require 'typeform'
 require 'json'
 
 module Typeform
