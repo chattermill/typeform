@@ -37,16 +37,13 @@ module Typeform
   class Unavailable < StandardError; end
 
   class Typeform
-    include HTTParty
-
     @@base_uri = "https://api.typeform.com"
     @@access_token = ""
-    headers({
+    @@headers = {
       'User-Agent' => "typeform-rest-#{VERSION}",
       'Content-Type' => 'application/json; charset=utf-8',
       'Accept-Encoding' => 'gzip, deflate'
-    })
-    self.base_uri @@base_uri
+    }
 
     class << self
       # Get the API key (Typeform::Typeform.access_token)
@@ -58,7 +55,11 @@ module Typeform
         @@access_token = access_token
       end
 
-      def get(*args); handle_response super end
+      def get(*args)
+        url = @@base_uri + args[0]
+        response = HTTParty.get url, args[1]
+        handle_response response
+      end
       # No POST, PUT or DELETE for now - Read only Typeform API
       # def post(*args); handle_response super end
       # def put(*args); handle_response super end

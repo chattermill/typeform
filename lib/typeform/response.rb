@@ -1,8 +1,6 @@
-require 'typeform'
 require 'json'
 
 module Typeform
-
   class Response
     attr_reader :form_id, :access_token
 
